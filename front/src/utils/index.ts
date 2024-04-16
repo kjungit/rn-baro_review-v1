@@ -1,1 +1,2 @@
-export * from './loginValidate';
+export * from './validate';
+export * from './common';
