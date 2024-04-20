@@ -1,15 +1,16 @@
+import CustomButton from '@/components/CustomButton';
+import InputField from '@/components/InputField';
+import useAuth from '@/hooks/queries/useAuth';
+import useForm from '@/hooks/useForm';
+import {validateLogin} from '@/utils';
 import React, {useRef} from 'react';
 import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
-import InputField from '../../components/InputField';
-import CustomButton from '../../components/CustomButton';
-import useForm from '../../hooks/useForm';
-import {validateLogin} from '../../utils';
 
 interface LoginScreenProps {}
 
 function LoginScreen({}: LoginScreenProps) {
   const passwordRef = useRef<TextInput | null>(null);
-
+  const {loginMutation} = useAuth();
   const login = useForm({
     initialValue: {
       email: '',
@@ -19,7 +20,7 @@ function LoginScreen({}: LoginScreenProps) {
   });
 
   const handleSubmit = () => {
-    console.log(login.values);
+    loginMutation.mutate(login.values);
   };
 
   return (
